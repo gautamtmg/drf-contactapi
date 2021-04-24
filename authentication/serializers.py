@@ -20,3 +20,14 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
 
+
+class LoginSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(max_length=233, min_length=4,write_only=True)
+    username = serializers.CharField(max_length=32)
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'password',
+        ]
